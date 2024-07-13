@@ -1,0 +1,33 @@
+@font-face {
+  font-family: Raleway;
+  src: url(../fonts/Raleway.ttf);
+}
+@font-face {
+  font-family: Raleway-Italic;
+  src: url(../fonts/Raleway-Italic.ttf);
+}
+
+* {
+  font-family: Raleway, sans-serif;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+}
+
+main {
+  width: 80vw;
+  height: 96vh;
+  margin: 2vh auto;
+  background-color: #ebf8e1;
+  opacity: 60%;
+  border-radius: 25px;
+}
+
+.main {
+  opacity: 100%;
+  margin: 1vh 1vw;
+}

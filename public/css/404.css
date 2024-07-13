@@ -1,0 +1,24 @@
+
+@font-face {
+    font-family: Raleway;
+    src: url(../fonts/Raleway.ttf);
+}
+@font-face {
+    font-family: Raleway-Italic;
+    src: url(../fonts/Raleway-Italic.ttf);
+}
+
+* {
+    font-family: Raleway, sans-serif;
+    overflow: hidden;
+}
+
+h1, h3 {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(#333, #eee);
+}

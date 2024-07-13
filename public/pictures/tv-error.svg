@@ -1,0 +1,28 @@
+<svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient y2="0" x2="1" y1="0" x1="0" id="svg_10">
+   <stop offset="0" stop-opacity="0.99609" stop-color="#ffffff"/>
+   <stop offset="1" stop-opacity="0.99609" stop-color="#000000"/>
+  </linearGradient>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <rect stroke-width="0" id="svg_1" height="400" width="100" y="0" x="0" stroke="#000000" fill="#666666"/>
+  <rect stroke-width="0" id="svg_2" height="400" width="100" y="0" x="100" stroke="#000" fill="#fdfdfd"/>
+  <rect stroke-width="0" id="svg_3" height="400" width="100" y="0" x="200" stroke="#000" fill="#fdfc01"/>
+  <rect stroke-width="0" id="svg_4" height="400" width="100" y="0" x="300" stroke="#000" fill="#00fefc"/>
+  <rect id="svg_5" height="400" width="100" y="0" x="400" stroke-width="0" stroke="#000" fill="#00fc01"/>
+  <rect id="svg_6" height="400" width="100" y="0" x="500" stroke-width="0" stroke="#000" fill="#ff00fc"/>
+  <rect id="svg_7" height="400" width="100" y="0" x="600" stroke-width="0" stroke="#000" fill="#fc0000"/>
+  <rect id="svg_8" height="400" width="100" y="0" x="700" stroke-width="0" stroke="#000" fill="#0000fe"/>
+  <rect id="svg_9" height="50" width="800" y="450" x="0" stroke-width="0" stroke="#000" fill="url(#svg_10)"/>
+  <rect id="svg_13" height="50" width="100" y="400" x="0" stroke-width="0" stroke="#000" fill="#00fc01"/>
+  <rect id="svg_14" height="50" width="100" y="400" x="100" stroke-width="0" stroke="#000" fill="#0000fa"/>
+  <rect id="svg_15" height="50" width="100" y="400" x="200" stroke-width="0" stroke="#000" fill="#fe00fe"/>
+  <rect id="svg_16" height="50" width="100" y="400" x="300" stroke-width="0" stroke="#000" fill="#fffc01"/>
+  <rect id="svg_17" height="50" width="100" y="400" x="400" stroke-width="0" stroke="#000" fill="#fd0100"/>
+  <rect id="svg_18" height="50" width="100" y="400" x="500" stroke-width="0" stroke="#000" fill="#00fcfd"/>
+  <rect id="svg_19" height="50" width="100" y="400" x="599" stroke-width="0" stroke="#000" fill="#191816"/>
+  <rect id="svg_20" height="50" width="100" y="400" x="700" stroke-width="0" stroke="#000" fill="#fdfcfa"/>
+ </g>
+</svg>

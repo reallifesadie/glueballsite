@@ -1,4 +1,4 @@
 {
-    "cert": "/etc/letsencrypt/live/reallifesadie.net-0001/fullchain.pem",
-    "key": "/etc/letsencrypt/live/reallifesadie.net-0001/privkey.pem"
+    "cert": ".data/cert.pem",
+    "key": ".data/key.pem"
 }

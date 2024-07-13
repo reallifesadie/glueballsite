@@ -5,7 +5,12 @@
 // DELETE – Enables you to remove item or collection
 
 module.exports.run = (api, req,res,db) => {
-    api.loadapi("./api_modules");
-    
-    res.send(JSON.stringify({data: "WIP!"}))
+    switch(req.method) {
+        case "POST":
+            res.send(JSON.stringify({data: ""}))   
+            break;
+        case "GET":
+            res.send(JSON.stringify({data: "Test2!"}))
+            break;
+    }
 }

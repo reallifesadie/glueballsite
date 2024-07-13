@@ -98,7 +98,13 @@ db.serialize(() => {
 	if (!fs.existsSync(dbFile)) {
 		db.run("CREATE TABLE IF NOT EXISTS users (username TEXT, fName TEXT, lName TEXT, password TEXT, code TEXT)", (err, table) => {
 			if(!err) {
-			console.log("New table 'users' created! (username, fName, lName, password TEXT, code TEXT)");
+				console.log("New table 'users' created! (username, fName, lName, password, code)");
+			} else console.error(err)
+		});
+		// Spicy INIT
+		db.run("CREATE TABLE IF NOT EXISTS spicy (id INT, color TEXT)", (err, table) => {
+			if(!err) {
+				console.log("New table 'spicy' created! (id, color)");
 			} else console.error(err)
 		});
 		// yeah great password, eh THIS IS TEST CODE REMOVE LATER?

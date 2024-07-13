@@ -1,2 +1,2 @@
 # glueballsite
-Lots of functions, one server... whn t-t
+Lots of functions, one server... why t-t

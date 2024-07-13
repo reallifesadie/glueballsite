@@ -101,8 +101,8 @@ db.serialize(() => {
 			console.log("New table 'users' created! (username, fName, lName, password TEXT, code TEXT)");
 			} else console.error(err)
 		});
-		// yeah great password, eh?
-		db.run('INSERT INTO users (username, password) VALUES (?,?)', ["root", "fuckthisshit"], (err, row) => {
+		// yeah great password, eh THIS IS TEST CODE REMOVE LATER?
+		db.run('INSERT INTO users (username, password) VALUES (?,?)', ["root", "**"], (err, row) => {
 			if(!err) {
 				console.log("New user 'root' created!");
 			} else console.error(err);

@@ -100,15 +100,21 @@ cert: fs.readFileSync(config.cert)
 	console.log(`Your app is listening on port ${listener.address().port}`);
 });
 
+// Does .data/ exist?
+const dataFolder = "./.data/"
+if(!fs.existsSync(dataFolder)) {
+	fs.mkdirSync(dataFolder);
+	console.log("Created directory .data/")
+}
 // init sqlite db
-const dbFile = "./.data/db.db";
+const dbFile = "db.db";
 const sqlite3 = require("sqlite3").verbose();
-const db = new sqlite3.Database(dbFile);
+const db = new sqlite3.Database(`${dataFolder}${dbFile}`);
 //"CREATE TABLE users (id TEXT, username TEXT, password TEXT)"
 // if ./.data/sqlite.db does not exist, create it, otherwise print records to console
 db.serialize(() => {
 	// if the database doesn't exist create it and create a test profile. Why root? Idk I guess I'm braindead...
-	if (!fs.existsSync(dbFile)) {
+	if (!fs.existsSync(`${dataFolder}${dbFile}`)) {
 		db.run("CREATE TABLE IF NOT EXISTS users (username TEXT, fName TEXT, lName TEXT, password TEXT, code TEXT)", (err, table) => {
 			if(!err) {
 				console.log("New table 'users' created! (username, fName, lName, password, code)");

@@ -6,8 +6,8 @@ Next, npm install in the directory
 You will need to create a config.json file, it will look like this:
 ```js
 {
-    "key": "path to key file",
-    "cert": "path to cert file"
+    "key": ".data/key.pem",
+    "cert": ".data/cert.pem"
 }
 ```
 
@@ -15,7 +15,9 @@ You will need to create a config.json file, it will look like this:
 next you will need those key and cert files
 letsencrypt is pretty cool but for a home project you can make ur own.
 put them in the data folder
+on new projects you will have to make the data folder
 ```bash
+mkdir .data/
 cd .data/
 openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 365 -nodes
-```
+``` 

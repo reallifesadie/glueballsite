@@ -30,43 +30,10 @@ const obviousMessage = [
 ]
 var width = 800;
 var height = 600;
-let sizethang = 10
-
-var main = document.getElementsByClassName("main")[0];
-    
+var sizethang = 10
+var color = "#f5f5f5";
 var svgns = "http://www.w3.org/2000/svg";
-var svg = document.createElementNS(svgns, "svg");
-svg.setAttribute('width', width);
-svg.setAttribute('height', height);
-svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
-
-fetch("/api/spicy").then(response => {
-    if (!response.ok) throw new Error('Network response was not ok');
-    return response.json(); // Assuming the response is JSON; you can use response.text() for non-JSON responses
-}).then(data => {
-    data.data.sort((a, b) => a.id - b.id);
-    let rect;
-    for (let i = 0; i < height / sizethang; i++) {
-        for (let j = 0; j < width / sizethang; j++) {
-            rect = document.createElementNS(svgns, 'rect');
-            rect.setAttribute('x', `${sizethang*j}`);
-            rect.setAttribute('y', `${sizethang*i}`);
-            rect.setAttribute('height', `${sizethang}`);
-            rect.setAttribute('width', `${sizethang}`);
-            rect.setAttribute('fill', data.data[(i*(width/sizethang))+j].color || "#ffffff");
-            rect.setAttribute('onclick', `clicky(${data.data[(i*(width/sizethang))+j].id})`);
-            //console.log(`${data.data[(i*(width/sizethang))+j].id} ${(i*(width/sizethang))+j}`)
-            svg.appendChild(rect)
-        }
-    }
-}).catch(error => {
-    console.error('Error:', error);
-});
-
-main.appendChild(svg);
-message = document.createElement('h4');
-message.innerHTML = obviousMessage[Math.floor(Math.random() * obviousMessage.length)]
-main.appendChild(message)
+var main = document.getElementsByClassName("main")[0];
 
 // Data to be sent in the body of the PUT request (replace with your data)
 var clicky = (id) => {
@@ -76,14 +43,57 @@ var clicky = (id) => {
           'Content-Type': 'application/json'
           // Add any other headers as needed
         },
-        body: JSON.stringify({id: id, color: "#ffffff"})
+        body: JSON.stringify({id: id, color: color})
       })
       .then(response => {
         if (!response.ok) throw new Error('Network response was not ok');
         return response.json(); // Assuming the response is JSON; you can use response.text() for non-JSON responses
       }).then(data => {
+        document.getElementsByClassName('test2')[0].remove()
+        main.appendChild(createSVG(data.data))
         console.log('Success:', data);
       }).catch(error => {
         console.error('Error:', error);
       });
 }
+
+var clicky2 = (setcolor) => {
+  color = setcolor;
+}
+
+var createSVG = (rectData) => {
+  let svg = document.createElementNS(svgns, "svg");
+  svg.setAttribute('class', 'test2')
+  svg.setAttribute('width', width);
+  svg.setAttribute('height', height);
+  svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
+
+  rectData.sort((a, b) => a.id - b.id);
+  let rect;
+  for (let i = 0; i < height / sizethang; i++) {
+    for (let j = 0; j < width / sizethang; j++) {
+      rect = document.createElementNS(svgns, 'rect');
+      rect.setAttribute('x', `${sizethang*j}`);
+      rect.setAttribute('y', `${sizethang*i}`);
+      rect.setAttribute('height', `${sizethang}`);
+      rect.setAttribute('width', `${sizethang}`);
+      rect.setAttribute('fill', rectData[(i*(width/sizethang))+j].color || "#ffffff");
+      rect.setAttribute('onclick', `clicky(${rectData[(i*(width/sizethang))+j].id})`);
+      svg.appendChild(rect)
+    }
+  }
+  return svg;
+}
+
+fetch("/api/spicy").then(response => {
+    if (!response.ok) throw new Error('Network response was not ok');
+    return response.json(); // Assuming the response is JSON; you can use response.text() for non-JSON responses
+}).then(data => {
+  main.appendChild(createSVG(data.data))
+}).catch(error => {
+    console.error('Error:', error);
+});
+
+message = document.createElement('h4');
+message.innerHTML = obviousMessage[Math.floor(Math.random() * obviousMessage.length)]
+main.appendChild(message)

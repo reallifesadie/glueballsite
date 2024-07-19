@@ -29,6 +29,7 @@ class api_modules {
 			files.forEach((file, fnum) =>{ 
 				if (!file.endsWith('js')) return;
 				try {
+					delete require.cache[require.resolve(`${moduleLocation}/${file}`)]
 					this.module[file.slice(0, file.lastIndexOf("."))] = require(`${moduleLocation}/${file}`);
 					console.log(`${fnum + 1}: API Module <${file.slice(0, file.lastIndexOf("."))}> loaded.`) //say I did it, loaded the file!
 				} catch (err) { console.error(err) } //woops err

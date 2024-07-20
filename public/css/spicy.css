@@ -7,6 +7,8 @@
     height: 25px;
     border-radius: 50%;
     margin: 10px;
+    border: solid;
+    border-color: gray;
   }
   
   main {

@@ -35,6 +35,8 @@ var color = "#f5f5f5";
 var svgns = "http://www.w3.org/2000/svg";
 var main = document.getElementsByClassName("main")[0];
 
+
+
 // Data to be sent in the body of the PUT request (replace with your data)
 var clicky = (id) => {
     fetch("/api/spicy", {
@@ -49,9 +51,10 @@ var clicky = (id) => {
         if (!response.ok) throw new Error('Network response was not ok');
         return response.json(); // Assuming the response is JSON; you can use response.text() for non-JSON responses
       }).then(data => {
+        // This deletes the current SVG and updates it
         document.getElementsByClassName('test2')[0].remove()
         main.appendChild(createSVG(data.data))
-        console.log('Success:', data);
+        //console.log('Success:', data);
       }).catch(error => {
         console.error('Error:', error);
       });
@@ -85,13 +88,22 @@ var createSVG = (rectData) => {
   return svg;
 }
 
+var scuffy = document.getElementById("scuffy");
+scuffy.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (/^#?([a-f0-9]{6})$/.test(scuffy.children[1].value)) {
+    console.log(scuffy.children[1].value)
+    color = scuffy.children[1].value
+  }
+});
+
 fetch("/api/spicy").then(response => {
-    if (!response.ok) throw new Error('Network response was not ok');
-    return response.json(); // Assuming the response is JSON; you can use response.text() for non-JSON responses
+  if (!response.ok) throw new Error('Network response was not ok');
+  return response.json(); // Assuming the response is JSON; you can use response.text() for non-JSON responses
 }).then(data => {
   main.appendChild(createSVG(data.data))
 }).catch(error => {
-    console.error('Error:', error);
+  console.error('Error:', error);
 });
 
 message = document.createElement('h4');

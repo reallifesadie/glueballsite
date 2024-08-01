@@ -92,8 +92,7 @@ var scuffy = document.getElementById("scuffy");
 scuffy.addEventListener("submit", (e) => {
   e.preventDefault();
   if (/^#?([a-f0-9]{6})$/.test(scuffy.children[1].value)) {
-    console.log(scuffy.children[1].value)
-    color = scuffy.children[1].value
+    color = scuffy.children[1].value.charAt(0) == '#' ? scuffy.children[1].value : `#${scuffy.children[1].value}`;
   }
 });
 
@@ -101,11 +100,11 @@ fetch("/api/spicy").then(response => {
   if (!response.ok) throw new Error('Network response was not ok');
   return response.json(); // Assuming the response is JSON; you can use response.text() for non-JSON responses
 }).then(data => {
-  main.appendChild(createSVG(data.data))
+  main.appendChild(createSVG(data.data));
 }).catch(error => {
   console.error('Error:', error);
 });
 
 message = document.createElement('h4');
-message.innerHTML = obviousMessage[Math.floor(Math.random() * obviousMessage.length)]
-main.appendChild(message)
+message.innerHTML = obviousMessage[Math.floor(Math.random() * obviousMessage.length)];
+main.appendChild(message);

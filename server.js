@@ -48,7 +48,7 @@ http.get('*', function(request, response) {
 	response.redirect('https://' + request.headers.host + request.url);
 });
 
-app.get("*", (req, res) => {
+app.all("*", (req, res) => {
 	var spliturl = req.url.split(/[#?]+/)[0]
 	if (req.url.startsWith("/api")) {
 		let yeee = spliturl.split("/"); yeee.shift();
@@ -62,32 +62,6 @@ app.get("*", (req, res) => {
 		res.sendFile(__dirname+respondto[spliturl]);
 	} else {
 		res.sendFile(__dirname+respondto["/404"]);
-	}
-});
-
-app.post("*", (req, res) => {
-	var spliturl = req.url.split(/[#?]+/)[0]
-	if (req.url.startsWith("/api")) {
-		let yeee = req.url.split("/"); yeee.shift();
-
-		if(api.module[yeee[1]]) {
-			api.module[yeee[1]].run(api, req, res, db);
-		} else {
-			res.send(JSON.stringify({"data": "Invalad API call"}));
-		}
-	}
-});
-
-app.put("*", (req, res) => {
-	var spliturl = req.url.split(/[#?]+/)[0]
-	if (req.url.startsWith("/api")) {
-		let yeee = req.url.split("/"); yeee.shift();
-
-		if(api.module[yeee[1]]) {
-			api.module[yeee[1]].run(api, req, res, db);
-		} else {
-			res.send(JSON.stringify({"data": "Invalad API call"}));
-		}
 	}
 });
 

@@ -40,7 +40,7 @@ var main = document.getElementsByClassName("main")[0];
 // Data to be sent in the body of the PUT request (replace with your data)
 var clicky = (id) => {
     fetch("/api/spicy", {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
           // Add any other headers as needed

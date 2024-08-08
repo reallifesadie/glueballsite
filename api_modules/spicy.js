@@ -9,7 +9,7 @@ const { json } = require("express");
 module.exports.run = (api,req,res,db) => {
     switch(req.method) {
         //Change Color at ID and send color list 
-        case "PUT":
+        case "PATCH":
             if(req.body.id > 4800 || req.body.id < 0 || req.body.id == "" || req.body.id == undefined) {
                 res.send(JSON.stringify({data: `ID ${req.body.id} INVALID`}));
                 break;

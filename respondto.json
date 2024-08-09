@@ -2,5 +2,6 @@
 	"/": "/views/index.html",
 	"/404": "/views/404.html",
 	"/editor": "/views/editor.html",
-	"/spicy": "/views/spicy.html"
+	"/spicy": "/views/spicy.html",
+	"/test": "/views/test.html"
 }

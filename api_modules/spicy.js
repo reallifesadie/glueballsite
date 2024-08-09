@@ -22,7 +22,7 @@ module.exports.run = (api,req,res,db) => {
                 if(!err) {
                     db.all("SELECT * FROM spicy", (err2, rows) => {
                         if(!err2) {
-                            res.send(JSON.stringify({data: rows}))
+                            res.send(JSON.stringify({data: rows}));
                         } else console.error(err2);
                     });
                 } else console.error(err);

@@ -5,7 +5,7 @@
 // DELETE – Enables you to remove item or collection
 
 module.exports.run = (api, req,res,db) => {
-    res.send(JSON.stringify({data: "OK!"}))
+    res.send(JSON.stringify({data: "OK!"}));
 }
 
 module.exports.help = {

@@ -1,8 +1,16 @@
 // GET – Allows you to retrieve a list or collection
+//  - Login  with cookies?
 // POST – Helps you in creating a  new item in collection
+//  - New User
+//   - Username Password DisplayName
 // PUT – Replaces an item with another item in parameters
+//  - Login
+//   - Username Password
 // PATCH – Enables you to update an item with information in parameters
+//  - Update info
+//   - Username Password DisplayName(optinal)
 // DELETE – Enables you to remove item or collection
+//  - Delete Account
 
 module.exports.run = (api, req,res,db) => {
     switch(req.method) {
@@ -20,14 +28,3 @@ module.exports.run = (api, req,res,db) => {
 module.exports.help = {
     
 }
-
-// fetch('/api/login', {
-//     method: 'POST',
-//   credentials: 'same-origin',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({test2: "test2"})
-// })
-//   .then((response) => response.json())
-//   .then((data) => console.log(data));

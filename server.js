@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+// This class runs the API modules functionality.
 class api_modules {
 	constructor(moduleLocation) {
 		this.loadapi(moduleLocation);
@@ -48,19 +49,23 @@ http.get('*', function(request, response) {
 	response.redirect('https://' + request.headers.host + request.url);
 });
 
+// This is the part that does the website stuff!
 app.all("*", (req, res) => {
+	//This cuts off the end if after ? or #
 	var spliturl = req.url.split(/[#?]+/)[0]
 	if (req.url.startsWith("/api")) {
+		// This runs the api modules!
 		let yeee = spliturl.split("/"); yeee.shift();
-
 		if(api.module[yeee[1]]) {
 			api.module[yeee[1]].run(api, req, res, db);
 		} else {
 			res.send(JSON.stringify({"data": "Invalad API call"}));
 		}
 	}else if(respondto[spliturl]){
+		// Or sends a website as outlined in responses
 		res.sendFile(__dirname+respondto[spliturl]);
 	} else {
+		// Or if all else fails 404 page
 		res.sendFile(__dirname+respondto["/404"]);
 	}
 });
@@ -133,14 +138,5 @@ db.serialize(() => {
 const cleanseString = (string) => {
 	return string.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 };
-
-//Parden my SHIT CODE
-// 	db.get(`SELECT username FROM users WHERE username=?`, request.body.username, (err, row) => {
-// 		if (!err) {
-//			// Come on do something
-// 		} else console.error(err)
-// 	});
-// });
-
 
 

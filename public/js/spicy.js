@@ -105,6 +105,5 @@ fetch("/api/spicy").then(response => {
   console.error('Error:', error);
 });
 
-message = document.createElement('h4');
+message = document.getElementsByClassName("gecko")[0];
 message.innerHTML = obviousMessage[Math.floor(Math.random() * obviousMessage.length)];
-main.appendChild(message);

@@ -12,25 +12,29 @@
 	</head>
 	<body>
 		<main>
-			<div class="main">
-				<form id="sendthing">
-					<label for="location">Send to:</label>
-					<input type="text" id="location" name="location">
-					<br/>
-					<label for="sendtype">Send Thing:</label>
-					<select id="sendtype" name="sendtype">
-						<option value="GET">GET</option>
-						<option value="POST">POST</option>
-						<option value="PUT">PUT</option>
-						<option value="PATCH">PATCH</option>
-						<option value="DELETE">DELETE</option>
-					</select>
-					<br/>
-					<label for="jsdata">Input Data:</label>
-					<input type="text" id="jsdata" name="jsdata">
+			<div class="main" style="display: flex;">
+				<div>
+					<form id="sendthing">
+						<label for="location">Send to:</label>
+						<input type="text" id="location" name="location">
+						<br/>
+						<label for="sendtype">Send Thing:</label>
+						<select id="sendtype" name="sendtype">
+							<option value="GET">GET</option>
+							<option value="POST">POST</option>
+							<option value="PUT">PUT</option>
+							<option value="PATCH">PATCH</option>
+							<option value="DELETE">DELETE</option>
+						</select>
+						<br/>
+						<label for="jsdata">Input Data:</label>
+						<input type="text" id="jsdata" name="jsdata">
+						<input type="submit" value="Submit">
+					</form>
+				</div>
+				<div id="output" style="color: white; background-color: black; opacity: 80%; border-radius: 5%; width: 45vw; height: 50vh;">
 
-					
-				</form>
+				</div>
 			</div>
 		</main>
 	</body>

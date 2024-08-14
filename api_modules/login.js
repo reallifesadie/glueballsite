@@ -18,15 +18,15 @@ module.exports.run = (api, req,res,db) => {
     switch(req.method) {
         case "POST":
             console.log(req.body.data)
-            // let funkyList = [req.body.data.username, req.body.data.displayname, req.body.data.password]
-            // for(let i = 0; i < funkyList.length; i++) {
-            //     if(!funkyList[i] || funkyList[i] == "") {
-            //         res.send(JSON.stringify({data: "Please include INFORMATINONN!"}));
-            //         break;
-            //     }
-            //     console.log(i)
-            // }
-            res.send(JSON.stringify({data: "AAAAAAAAAAAAAAA!"}));
+            let funkyList = [req.body.data.username, req.body.data.displayname, req.body.data.password]
+            for(let i = 0; i < funkyList.length; i++) {
+                if(!funkyList[i] || funkyList[i] == "") {
+                    res.send(JSON.stringify({data: "Please include INFORMATINONN!"}));
+                    break;
+                }
+                console.log(i)
+            }
+            res.send(JSON.stringify({data: "OK! 👍"}));
             break;
         case "GET":
             res.send(JSON.stringify({data: "Test2!"}));

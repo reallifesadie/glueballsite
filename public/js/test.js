@@ -11,8 +11,7 @@ fouff.addEventListener("submit", (event) => {
         }
     }
     if(fouff[1].value != "GET") {
-        console.log(fouff[1].value);
-        thingbox.body = JSON.stringify(fouff[2]);
+        thingbox.body = fouff[2].value;
     }
     fetch(fouff[0].value, thingbox).then(response => {
         if (!response.ok) throw new Error('Network response was not ok');

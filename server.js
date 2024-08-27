@@ -9,6 +9,7 @@ var cookieParser = require('cookie-parser');
 
 const app = express();
 var http = express();
+
 const fs = require("fs");
 var https = require('https');
 
@@ -17,6 +18,10 @@ const { json } = require("express");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+
+if(!(config.key || config.cert)) {
+	return new Error("No certificate files detected for https!")
+}
 
 // This class runs the API modules functionality.
 class api_modules {
@@ -46,8 +51,8 @@ app.use(express.static("public"));
 
 // This should listen on http and redirect to https.
 http.get('*', function(request, response) {  
-	response.redirect('https://' + request.headers.host + request.url);
-});
+	response.redirect('https://' + request.hostname + `:${config.https || 3005}` + request.url);
+});					
 
 // This is the part that does the website stuff!
 app.all("*", (req, res) => {
@@ -70,13 +75,16 @@ app.all("*", (req, res) => {
 	}
 });
 
-var httpListener = http.listen(process.env.httpPORT || 80, () => {
+
+// http listens op port defined as http in config.
+var httpListener = http.listen(config.http || 3000, () => {
 	console.log(`Your app is listening on port ${httpListener.address().port}`);
 });
+
 var listener = https.createServer({
 key: fs.readFileSync(config.key),
 cert: fs.readFileSync(config.cert)
-}, app).listen(process.env.PORT || 443, () => {
+}, app).listen(config.https || 3005, () => {
 	console.log(`Your app is listening on port ${listener.address().port}`);
 });
 
@@ -95,9 +103,9 @@ const db = new sqlite3.Database(`${dataFolder}${dbFile}`);
 db.serialize(() => {
 	// if the database doesn't exist create it and create a test profile. Why root? Idk I guess I'm braindead...
 	if (!fs.existsSync(`${dataFolder}${dbFile}`)) {
-		db.run("CREATE TABLE IF NOT EXISTS users (username TEXT, fName TEXT, lName TEXT, password TEXT, code TEXT)", (err, table) => {
+		db.run("CREATE TABLE IF NOT EXISTS users (username TEXT, name TEXT password TEXT, code TEXT)", (err, table) => {
 			if(!err) {
-				console.log("New table 'users' created! (username, fName, lName, password, code)");
+				console.log("New table 'users' created! (username, name, password, code)");
 			} else console.error(err)
 		});
 		// Spicy INIT

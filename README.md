@@ -7,10 +7,13 @@ You will need to create a config.json file, it will look like this:
 ```js
 {
     "key": ".data/key.pem",
-    "cert": ".data/cert.pem"
+    "cert": ".data/cert.pem",
+    "http": 3000,
+    "https": 3005
 }
 ```
 
+The `http` and `https` flags will default to 3000 and 3005 if left out.
 
 next you will need those key and cert files
 letsencrypt is pretty cool but for a home project you can make ur own.

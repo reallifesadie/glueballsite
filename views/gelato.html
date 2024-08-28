@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Durango Gelato</title>
+    <link rel="stylesheet" href="/css/gelato.css">
+    <script src="/js/gelato.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Durango Gelato</h1>
+        <h4>Coffee & Tea</h4>
+    </header>
+
+    <section class="image-container">
+        <div class="dropdown-container" onclick="toggleDropdown(`dropdown1`)">
+            <h2>Our Hours ↴</h2>
+            <div class="dropdown-content" id="dropdown1">
+                <table>
+                    <tr>
+                        <th>Day</th>
+                        <th>Hours</th>
+                    </tr>
+                    <tr>
+                        <td>Monday</td>
+                        <td>11:00 AM - 7:00 PM</td>
+                    </tr>
+                    <tr>
+                        <td>Tuesday</td>
+                        <td>11:00 AM - 7:00 PM</td>
+                    </tr>
+                    <tr>
+                        <td>Wednesday</td>
+                        <td>11:00 AM - 7:00 PM</td>
+                    </tr>
+                    <tr>
+                        <td>Thursday</td>
+                        <td>11:00 AM - 7:00 PM</td>
+                    </tr>
+                    <tr>
+                        <td>Friday</td>
+                        <td>11:00 AM - 7:00 PM</td>
+                    </tr>
+                    <tr>
+                        <td>Saturday</td>
+                        <td>11:00 AM - 7:00 PM</td>
+                    </tr>
+                    <tr>
+                        <td>Sunday</td>
+                        <td>11:00 AM - 7:00 PM</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="dropdown-container" onclick="toggleDropdown(`dropdown2`)">
+            <h2>Our Flavors ↴</h2>
+            <div class="dropdown-content" id="dropdown2">
+                <ul>
+                    <li>Chocolate</li>
+                    <li>Vanilla</li>
+                    <li>Strawberry</li>
+                    <li>Mint Chocolate Chip</li>
+                    <li>Coffee</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

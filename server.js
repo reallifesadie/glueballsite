@@ -20,8 +20,12 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 if(!(config.key || config.cert)) {
-	return new Error("No certificate files detected for https!")
-}
+	console.error(new Error("Please define cert files in your config file"));
+	return 0;
+} else if(!(fs.existsSync(config.key ) || fs.existsSync(config.cert))) {
+	console.error(new Error("Certificate files not detected!"));
+	return 0;
+} 
 
 // This class runs the API modules functionality.
 class api_modules {
@@ -103,7 +107,7 @@ const db = new sqlite3.Database(`${dataFolder}${dbFile}`);
 db.serialize(() => {
 	// if the database doesn't exist create it and create a test profile. Why root? Idk I guess I'm braindead...
 	if (!fs.existsSync(`${dataFolder}${dbFile}`)) {
-		db.run("CREATE TABLE IF NOT EXISTS users (username TEXT, name TEXT password TEXT, code TEXT)", (err, table) => {
+		db.run("CREATE TABLE IF NOT EXISTS users (username TEXT, name TEXT, password TEXT, code TEXT)", (err, table) => {
 			if(!err) {
 				console.log("New table 'users' created! (username, name, password, code)");
 			} else console.error(err)

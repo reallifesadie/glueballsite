@@ -34,19 +34,22 @@ module.exports.run = (api,req,res,db) => {
                 res.send(JSON.stringify({data: "Please include username password and displayname!"}));
                 break;
             }
-            db.get("SELECT username FROM spicy WHERE username = ?", [req.body.username], (err, row) => {
-                if(err) console.error(err);
-                console.log(row);
+            db.get("SELECT username FROM users WHERE username = ?", [req.body.data.username], (err, row) => {
+                if(err) return console.error(err);
+                if(row == undefined) {
+                    bcrypt.hash(req.body.data.password, saltRounds, function(err, hash) {
+                        if(err) return console.error(err);
+                        db.run('INSERT INTO users (username, password) VALUES (?,?)', [req.body.data.username, hash], (err, row) => {
+                            if(err) return console.error(err);
+                            console.log(`New user ${req.body.data.username} created!`);
+                        });
+                    });
+                } else {
+                    console.log("username allready exists")
+                    //res.send(JSON.stringify({data: `Username ` + req.body.data.username + ` already exists!`}));
+                }
             });
-            // bcrypt.hash(req.body.data.password, saltRounds, function(err, hash) {
-            //     if(!err) {
-            //         db.run('INSERT INTO users (username, password) VALUES (?,?)', [req.body.data.username, hash], (err, row) => {
-            //             if(!err) {
-            //                 console.log("New user 'root' created!");
-            //             } else console.error(err);
-            //         });
-            //     } else console.error(err);
-            // });
+            
             res.send(JSON.stringify({data: "OK! 👍"}));
             break;
         case "GET":

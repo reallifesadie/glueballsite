@@ -64,7 +64,11 @@ select {
 
 @keyframes fall {
     to {
+<<<<<<< HEAD
         transform: translateY(100vh) rotate(360deg);
+=======
+        transform: translateY(100vh);
+>>>>>>> 4fd41c0 (gelato)
         opacity: 0;
     }
 }

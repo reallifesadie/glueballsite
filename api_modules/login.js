@@ -42,15 +42,14 @@ module.exports.run = (api,req,res,db) => {
                         db.run('INSERT INTO users (username, password) VALUES (?,?)', [req.body.data.username, hash], (err, row) => {
                             if(err) return console.error(err);
                             console.log(`New user ${req.body.data.username} created!`);
+                            res.send(JSON.stringify({data: `New user ${req.body.data.username} created!`}));
                         });
                     });
                 } else {
-                    console.log("username allready exists")
-                    //res.send(JSON.stringify({data: `Username ` + req.body.data.username + ` already exists!`}));
+                    res.send(JSON.stringify({data: `Username ` + req.body.data.username + ` already exists!`}));
                 }
             });
             
-            res.send(JSON.stringify({data: "OK! 👍"}));
             break;
         case "GET":
             res.send(JSON.stringify({data: "Test2!"}));

@@ -4,5 +4,24 @@
     "cookie-parser": "^1.4.6",
     "express": "^4.17.2",
     "sqlite3": "^5.0.2"
-  }
+  },
+  "name": "site",
+  "version": "1.0.0",
+  "description": "Lots of functions, one server... why t-t",
+  "main": "server.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reallifesadie/glueballsite.git"
+  },
+  "author": "reallifesadie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reallifesadie/glueballsite/issues"
+  },
+  "homepage": "https://github.com/reallifesadie/glueballsite#readme"
 }

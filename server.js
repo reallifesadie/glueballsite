@@ -35,16 +35,37 @@ class api_modules {
 	loadapi(moduleLocation) {
 		this.module = [];
 		fs.readdir(moduleLocation, (err, files) => { //Snag files
-			console.log(`--\n`)
+			if(err) return console.error(err);
+			let offset = 0;
 			files.forEach((file, fnum) =>{ 
-				if (!file.endsWith('js')) return;
+				if (!file.endsWith('js')) {
+					offset--
+					return;
+				};
 				try {
-					delete require.cache[require.resolve(`${moduleLocation}/${file}`)]
+					if (require.cache[require.resolve(`${moduleLocation}/${file}`)]) delete require.cache[require.resolve(`${moduleLocation}/${file}`)];
 					this.module[file.slice(0, file.lastIndexOf("."))] = require(`${moduleLocation}/${file}`);
-					console.log(`${fnum + 1}: API Module <${file.slice(0, file.lastIndexOf("."))}> loaded.`) //say I did it, loaded the file!
+					console.log(`${fnum + 1 + offset}: API Module <${file.slice(0, file.lastIndexOf("."))}> loaded.`) //say I did it, loaded the file!
 				} catch (err) { console.error(err) } //woops err
 			});
 		});		
+	}
+	initdb(moduleLocation) {
+		let dbinitfunc = [];
+		fs.readdir(moduleLocation, (err, files) => {
+			if(err) return console.error(err);
+			let offset = 0;
+			files.forEach((file, fnum) =>{ 
+				if (!file.endsWith('js')) {
+					offset--
+					return;
+				}
+				try {
+					require(`${moduleLocation}/${file}`).run(this,db);
+					console.log(`${fnum + 1 + offset}: DB Module <${file.slice(0, file.lastIndexOf("."))}> initalized.`) //say I did it, loaded the file!
+				} catch (err) { console.error(err) } //woops err
+			});
+		})
 	}
 }
 
@@ -93,57 +114,29 @@ cert: fs.readFileSync(config.cert)
 });
 
 // Does .data/ exist?
-const dataFolder = "./.data/"
+const dataFolder = "./.data"
 if(!fs.existsSync(dataFolder)) {
 	fs.mkdirSync(dataFolder);
-	console.log("Created directory .data/")
+	console.log("Created directory .data")
 }
 // init sqlite db
 const dbFile = "db.db";
 const sqlite3 = require("sqlite3").verbose();
-const db = new sqlite3.Database(`${dataFolder}${dbFile}`);
+const db = new sqlite3.Database(`${dataFolder}/${dbFile}`);
 //"CREATE TABLE users (id TEXT, username TEXT, password TEXT)"
 // if ./.data/sqlite.db does not exist, create it, otherwise print records to console
 db.serialize(() => {
 	// if the database doesn't exist create it and create a test profile. Why root? Idk I guess I'm braindead...
-	if (!fs.existsSync(`${dataFolder}${dbFile}`)) {
+	if (!fs.existsSync(`${dataFolder}/${dbFile}`)) {
 		db.run("CREATE TABLE IF NOT EXISTS users (username TEXT, name TEXT, password TEXT, code TEXT)", (err, table) => {
 			if(!err) {
 				console.log("New table 'users' created! (username, name, password, code)");
 			} else console.error(err)
 		});
-		// Spicy INIT
-		var width = 800;
-		var height = 600;
-		let sizethang = 10
-		db.run("CREATE TABLE IF NOT EXISTS spicy (id INT, color TEXT)", (err, table) => {
-			if(!err) {
-				let color;
-				for (let i = 0; i < height / sizethang; i++) {
-					for (let j = 0; j < width / sizethang; j++) {
-						color = `#${Math.round(0xffffff * Math.random()).toString(16)}`
-						db.run('INSERT INTO spicy (id, color) VALUES (?,?)', [((i*(width/sizethang))+j), color], (err2, row) => {
-							if(err) console.error(err2);
-						});
-					}
-				}
-				console.log(`New table 'spicy' created! (id, color) with ${(width*height/sizethang**2)} random colors populated`);
-			} else console.error(err)
-		});
-		// yeah great password, eh THIS IS TEST CODE REMOVE LATER?
-		db.run('INSERT INTO users (username, password) VALUES (?,?)', ["root", "**"], (err, row) => {
-			if(!err) {
-				console.log("New user 'root' created!");
-			} else console.error(err);
-		});
 	} else { 
 		console.log('Database ready to go!');
-
-		// This will log all users in the db
-		// db.each("SELECT username FROM users", (err, row) => {
-		//   console.log(row.username)
-		// });
 	}
+	api.initdb("./db_modules");
 });
 
 // helper function that prevents html/css/script malice

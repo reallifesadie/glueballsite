@@ -3,8 +3,10 @@ module.exports.run = (api,db) => {
     var width = 800;
     var height = 600;
     let sizethang = 10
-    db.run("CREATE TABLE IF NOT EXISTS spicy (id INT, color TEXT)", (err, table) => {
-        if(!err) {
+    db.all("SELECT id FROM spicy", (err, rows) => {
+        if(rows) return;
+        db.run("CREATE TABLE IF NOT EXISTS spicy (id INT, color TEXT)", (err) => {
+            if(err) return console.error(err);
             let color;
             for (let i = 0; i < height / sizethang; i++) {
                 for (let j = 0; j < width / sizethang; j++) {
@@ -15,7 +17,7 @@ module.exports.run = (api,db) => {
                 }
             }
             console.log(`New table 'spicy' created! (id, color) with ${(width*height/sizethang**2)} random colors populated`);
-        } else console.error(err)
+        });
     });
 }
 

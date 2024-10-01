@@ -1,0 +1,29 @@
+/* Container for the word */
+.word {
+    font-size: 8vw;
+    overflow: visible;
+    margin: 2vh auto;
+    display: inline-block;
+}
+
+/* Styling each letter */
+.word span {
+    -webkit-text-stroke: 1px #333333;
+    display: inline-block;
+    animation: moveUpDown 2s infinite ease-in-out;
+    animation-delay: calc(0.1s * var(--i));
+}
+
+main {
+    text-align: center;
+}
+
+/* Animation for moving up and down */
+@keyframes moveUpDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-30px);
+    }
+}

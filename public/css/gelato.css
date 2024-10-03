@@ -2,7 +2,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8;
+    background-color: #797596;
+    background-image: linear-gradient(to bottom right, #963484, #3066be);
     color: #333;
     /*overflow: hidden;*/
     height: 100vh;
@@ -10,20 +11,22 @@ body {
 }
 
 header {
-    background-color: #ff6f61;
-    padding: 20px;
+    height: 8vh;
     text-align: center;
     color: white;
+    padding: 2vh 2vw;
 }
 
-header h1 {
+header h1, header h4, h2  {
     margin: 0;
 }
 
+
+
 section {
-    padding: 20px;
-    max-width: 800px;
     margin: auto;
+    width: 100%;
+    height: 84vh;
 }
 
 table {
@@ -47,12 +50,25 @@ select {
     margin-top: 10px;
 }
 
+.main {
+  width: 80%;
+  height: 98%;
+  margin: 2vh auto;
+  padding: 1vh 1vw;
+  background-color: #f4f4f4;
+  opacity: 60%;
+  border-radius: 25px;
+  overflow: scroll;
+}
+
 .image-container {
     position: absolute;
-    top: 0;
+    overflow: hidden;
+    z-index: -1;
+    top: -10vh;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 110vh;
     pointer-events: none; /* Prevent images from interfering with clicks */
 }
 

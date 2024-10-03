@@ -22,13 +22,14 @@ function createImage() {
     img.src = images[Math.floor(Math.random() * images.length)]; // Random image from the array
 
     img.style.left = `${Math.random() * 100}vw`;
-    img.style.animationDuration = `${Math.random() * 3 + 2}s`;
+    let blep = Math.random() * 3 + 2
+    img.style.animationDuration = `${blep}s`;
 
     imageContainer.appendChild(img);
 
     setTimeout(() => {
         img.remove();
-    }, 5000);
+    }, blep*1000);
 }
 
 setInterval(createImage, 200);

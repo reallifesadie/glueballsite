@@ -35,29 +35,37 @@ var color = "#f5f5f5";
 var svgns = "http://www.w3.org/2000/svg";
 var main = document.getElementsByClassName("main")[0];
 
-
+var mouseDown = 0;
+document.body.onmousedown = function() { 
+  ++mouseDown;
+}
+document.body.onmouseup = function() {
+  --mouseDown;
+}
 
 // Data to be sent in the body of the PUT request (replace with your data)
-var clicky = (id) => {
+var clicky = (id, force) => {
+  if(mouseDown || force) {
     fetch("/api/spicy", {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json'
-          // Add any other headers as needed
-        },
-        body: JSON.stringify({id: id, color: color})
-      })
-      .then(response => {
-        if (!response.ok) throw new Error('Network response was not ok');
-        return response.json(); // Assuming the response is JSON; you can use response.text() for non-JSON responses
-      }).then(data => {
-        // This deletes the current SVG and updates it
-        document.getElementsByClassName('test2')[0].remove()
-        main.appendChild(createSVG(data.data))
-        //console.log('Success:', data);
-      }).catch(error => {
-        console.error('Error:', error);
-      });
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+        // Add any other headers as needed
+      },
+      body: JSON.stringify({id: id, color: color})
+    })
+    .then(response => {
+      if (!response.ok) throw new Error('Network response was not ok');
+      return response.json(); // Assuming the response is JSON; you can use response.text() for non-JSON responses
+    }).then(data => {
+      // This deletes the current SVG and updates it
+      document.getElementsByClassName('test2')[0].remove()
+      main.appendChild(createSVG(data.data))
+      //console.log('Success:', data);
+    }).catch(error => {
+      console.error('Error:', error);
+    });
+  }
 }
 
 var clicky2 = (setcolor) => {
@@ -81,7 +89,8 @@ var createSVG = (rectData) => {
       rect.setAttribute('height', `${sizethang}`);
       rect.setAttribute('width', `${sizethang}`);
       rect.setAttribute('fill', rectData[(i*(width/sizethang))+j].color || "#ffffff");
-      rect.setAttribute('onclick', `clicky(${rectData[(i*(width/sizethang))+j].id})`);
+      rect.setAttribute('onmouseover', `clicky(${rectData[(i*(width/sizethang))+j].id})`);
+      rect.setAttribute('onmousedown', `clicky(${rectData[(i*(width/sizethang))+j].id}, true)`);
       svg.appendChild(rect)
     }
   }

@@ -3,5 +3,6 @@
 	"/404": "/views/404.html",
 	"/editor": "/views/editor.html",
 	"/spicy": "/views/spicy.html",
+	"/sand": "/views/snad.html",
 	"/test": "/views/test.html"
 }

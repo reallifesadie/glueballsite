@@ -1,9 +1,10 @@
 {
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "cookie-parser": "^1.4.6",
-    "express": "^4.17.2",
-    "sqlite3": "^5.0.2"
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.1",
+    "sqlite3": "^5.0.2",
+    "three": "^0.171.0"
   },
   "name": "site",
   "version": "1.0.0",
